@@ -1,0 +1,48 @@
+@if(brandsData){
+    <section class="brands bg-main-light p-3  mx-auto rounded-2 shadow my-3">
+        <div class="container">
+            <h1 class="text-center text-main fs-1 fw-medium m-4">All Brands</h1>
+            <input [(ngModel)]="searchKey" type="text" placeholder="Search by name..." class="form-control search-border px-5 m-3 py-2 w-auto mx-auto" >         
+            <div class="row">
+                @for (brand of brandsData |search:searchKey; track brand._id) {
+                    <div class="col-12 col-md-3 col-sm-4 p-3">
+                        <div class="brand rounded-2 border border-1 p-3" data-bs-toggle="modal" [attr.data-bs-target]="'#Modal'+ brand._id">
+                            <img [src]="brand.image" class="w-100" height="200px" [alt]="brand.slug">
+                            <h2 class="text-center mt-3 fs-3">{{brand.name}}</h2>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal bg-modal fade " [id]="'Modal'+ brand._id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered ">
+                          <div class="modal-content ">
+                            <div class="modal-header">
+                              <h2 class="text-main fw-bold fs-2 mb-0">{{brand.name}}</h2>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="madal-body">
+                                <div class="container">
+                                    <div class="d-flex align-items-center justify-content-between row px-2">
+                                        <div >
+                                            <img [src]="brand.image" class="w-100" [alt]="brand.slug">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                   
+                          </div>
+                        </div>
+                      </div>
+                }
+            
+            </div>
+            <div class="pagination d-flex justify-content-center mt-4">
+                <button [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)" class="btn btn-secondary mx-1"> Prev </button>
+              
+                @for (page of pages; track $index) {
+                  <button [class.active]="page !== currentPage" (click)="goToPage(page)" class="btn btn-main  mx-1" > {{page}} </button>
+                }
+              
+                <button [disabled]="currentPage === numberOfPages" (click)="goToPage(currentPage + 1)" class="btn btn-secondary mx-1" > Next </button>
+              </div>
+        </div>  
+    </section>
+}

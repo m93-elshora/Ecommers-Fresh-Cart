@@ -1,0 +1,19 @@
+.card:hover{
+    box-shadow: 0 0 10px 2px #11bd1168;
+}
+.card{
+    transition: box-shadow 500ms;
+}
+.categories{
+    width: 90%;
+}
+.search-border{
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+    border-radius: 50px;
+}
+.dropdown-toggle::after{
+    border-top: 0 solid;
+}
+.dropdown-menu {
+    width: 100%; /* يجعل القائمة بنفس عرض العنصر */
+  }

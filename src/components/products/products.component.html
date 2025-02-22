@@ -1,0 +1,49 @@
+<section class="products bg-main-light p-3  mx-auto rounded-2 shadow my-3">
+    <input [(ngModel)]="searchKey" type="text" placeholder="Search by name..." class="form-control search-border px-5 m-3 py-2 w-auto mx-auto" >
+    <div class="container">
+        <div class="row">
+            @for (product of productsData | search :searchKey; track product._id) {
+                <div class="col-md-3 col-sm-4 col-12 p-2">
+                    <div class="product  border-0 cursor-pointer p-3 position-relative">
+                        <div class="wish-list-icon" [class.active]="isInWishlist(product._id)" (click)="toggleWishlist(product)">
+                            <i class="fa-heart fs-4" [ngClass]="isInWishlist(product._id) ? 'fa-solid text-danger' : 'fa-regular'"></i>
+                        </div>
+                        <div [routerLink]="['/productDetails', product._id]">
+                            <div class="product-img my-2">
+                                <img [src]="product.imageCover" alt="" class="w-100 rounded-2">
+                            </div>
+                            <div class="product-caption mt-4">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="fs-6 text-main">{{product.category.name}}</p>
+                                    <p class="fs-6 ">{{product.brand.name}}</p>
+                                </div>
+                                <p >{{product.title.split(' ').splice(0,2).join(' ')}}</p>
+                                <p >{{product.description.split(' ').splice(0,8).join(' ')}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><span>{{product.price}} EGP</span></div>
+                                    <div>
+                                        @for (star of [1,2,3,4,5].slice(0 , product.ratingsAverage); track $index) { <span><i class="fa-solid fa-star rating-color"></i></span>}
+                                        @if (product.ratingsAverage %1 != 0) {<i class="fa-regular fa-star-half-stroke rating-color"></i>}
+                                        <span>{{product.ratingsAverage}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <button (click)="addItemToCart(product._id)" class="btn-main my-2 w-100"> Add to Cart<i class="fa-solid fa-cart-plus ms-1 "></i></button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="pagination d-flex justify-content-center mt-4">
+            <button [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)" class="btn btn-secondary mx-1"> Prev </button>
+          
+            @for (page of pages; track $index) {
+              <button [class.active]="page !== currentPage" (click)="goToPage(page)" class="btn btn-main mx-1" > {{page}} </button>
+            }
+          
+            <button [disabled]="currentPage === numberOfPages" (click)="goToPage(currentPage + 1)" class="btn btn-secondary mx-1" > Next </button>
+          </div>
+        
+    </div>
+</section>
+

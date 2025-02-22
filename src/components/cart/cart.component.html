@@ -1,0 +1,41 @@
+@if (cartData) {
+    <section class="bg-main-light p-3 carts mx-auto rounded-2 shadow my-3">        
+        <div class="container">
+                <h1 class="fs-1 fw-medium text-center "> Shop Cart <i class="ms-1 fa-solid fa-cart-shopping "></i></h1>
+                
+            @for (item of cartData.products; track item.product._id) {
+                <div class="row border-bottom border-3 align-items-center my-2  ">
+                    <div class="col-3 col-md-2 pb-2">
+                        <div class="item-img">
+                            <img [src]="item.product.imageCover" class="w-100" [alt]="item.product.title">
+                        </div>                    
+                    </div>
+                    <div class="col-6 col-md-8 ps-4 py-4 ps-md-5">
+                        <div class="item-details">
+                            <p class="fs-5">{{item.product.title}}</p>
+                            <p class=" fs-6">{{item.price * item.count | currency:'GBP'}}</p>
+                            <span class=" fs-5 d-flex align-items-center mt-3 mt-md-5"><i (click)="removeCartItem(item.product._id)" class="fa-solid text-main fa-trash-can cursor-pointer pe-2 fs-4"></i>Remove</span>
+                        </div>
+                    </div>
+                    <div class="col-3 col-md-2 p-2 ">
+                        <div class="item-quantity fs-4 d-flex justify-content-between align-items-center ">
+                            <span (click)="updateItemQuantity(item.product._id,item.count+1)"><i class="fa-solid fa-circle-plus text-main cursor-pointer"></i></span>
+                            <span class="fs-2 px-2">{{item.count}}</span>
+                            @if (item.count > 1) {
+                                <span (click)="updateItemQuantity(item.product._id,item.count-1)"><i class="fa-solid text-main fa-circle-minus cursor-pointer"></i></span>
+                            }@else {
+                                <span (click)="updateItemQuantity(item.product._id,item.count-1)"><i class="fa-solid text-main fa-circle-minus opacity-25"></i></span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            <h3 class="text-center mt-2"><span>Total Cart Price:</span> <span class="text-main ">{{cartData.totalCartPrice| currency:'GBP'}}</span></h3>
+            @if (cartData.products.length) {    
+                    <button [routerLink]="['/shippingAddress',cartData._id]" class="w-50 btn-main mx-auto mt-3 d-block cursor-pointer btn"><i class="fa-regular fa-credit-card pe-2"></i>CheckOut</button>
+                    <!-- <button [routerLink]="['/payCash',cartData._id]" class="w-50 btn-main mx-auto mt-3 d-block cursor-pointer"><i class="fa-solid fa-sack-dollar pe-2"></i>Pay in Cash</button> -->
+                }
+            @if (cartData.products.length) {    <button (click)="clearCart()" class="btn cursor-pointer btn-danger w-50 mx-auto mt-3 d-block "> <i  class="fa-solid fa-trash-can pe-2"></i>Clear Cart</button>   }
+        </div>
+    </section>
+}

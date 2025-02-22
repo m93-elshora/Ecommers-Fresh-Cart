@@ -1,0 +1,19 @@
+.nav-main{
+    width: 90%;
+}
+.fa-cart-shopping{
+    position: relative;
+}
+.total-items{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 50%;
+    top: -50%;
+    color: white;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}

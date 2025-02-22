@@ -1,0 +1,32 @@
+<section class="bg-main-light p-3 shipping mx-auto rounded-2 shadow my-3">
+    <div class="container">
+        <h1 class="text-main fw-bold mb-4 fs-2">Shipping Address </h1>
+        <form [formGroup]="shippingAddress" (ngSubmit)="payOrder()" >
+            <div class="my-3">
+                <label for="details" class="mb-2 fs-6 fw-semibold"><span class="text-danger me-1">*</span>Details</label>
+                <textarea formControlName="details" class="form-control p-2" id="details"></textarea>
+            </div>
+            <div class="my-3">
+                <label for="phone" class="mb-2 fs-6 fw-semibold"><span class="text-danger me-1">*</span>Phone</label>
+                <input formControlName="phone" type="tel" class="form-control p-2" id="phone">
+            </div>
+            <div class="my-3">
+                <label for="city" class="mb-2 fs-6 fw-semibold"><span class="text-danger me-1">*</span>City</label>
+                <input formControlName="city" type="text" class="form-control p-2" id="city">
+            </div>
+            <label class="fs-6 mb-2 fw-semibold" ><span class="text-danger me-1">*</span>Payment Method</label>
+            <div class="mb-3  card p-2">
+                <div> <input type="radio"  class="me-2 my-2 " formControlName="paymentMethod" value="cash" > <i class="fa-solid fa-sack-dollar pe-2"></i> Pay in Cash   </div>
+                <div> <input type="radio"  class="me-2 my-2 " formControlName="paymentMethod" value="online" > <i class="fa-regular fa-credit-card pe-2"></i> Pay Online  </div>
+            </div>
+            <button [disabled]="shippingAddress.invalid" type="submit" class="btn-main d-block mb-3 mx-auto w-50">Payment
+                @if(loading){
+                    <i class="fa-solid fa-spinner fa-spin-pulse ms-2"></i>         
+                   }
+            </button>
+
+        </form>
+    </div>
+
+
+</section>

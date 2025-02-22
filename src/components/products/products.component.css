@@ -1,0 +1,22 @@
+.wish-list-icon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+ 
+.wish-list-icon i {
+    transition: color 0.3s ease;
+}
+  
+.wish-list-icon.active i {
+    color: red;
+}
+
+.products{
+    width: 90%;
+}
+
+.search-border{
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+    border-radius: 50px;
+}

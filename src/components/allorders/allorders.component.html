@@ -1,0 +1,78 @@
+ 
+
+<section class="orders  p-3  mx-auto rounded-4 shadow my-5">
+        <h1 class="text-center text-main fs-1 fw-medium m-4">All Orders</h1>
+        @if (allOrders.length) {
+          <div >
+            @for (order of allOrders; track order.id) {
+                <div class="card bg-main-light p-4 my-5  rounded-3">
+                    <div class="d-flex align-items-baseline justify-content-between">
+                        <div>
+                            <h2 class="mb-1 text-main">Order  <span class="text-main">#{{order.id}}</span></h2>
+                            
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between py-1">
+                                <div class="me-3">Is Paid </div>
+                                <div>@if (order.isPaid) {<i class="fa-regular fa-circle-check fa-xl" style="color: #63E6BE;"></i>}@else {<i class="fa-regular fa-circle-xmark fa-xl" style="color: #63E6BE;"></i>}</div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between py-1">
+                                <div class="me-3">Is Delivered </div>
+                                <div>@if (order.isDelivered) {<i class="fa-regular fa-circle-check fa-xl" style="color: #63E6BE;"></i>}@else {<i class="fa-regular fa-circle-xmark fa-xl" style="color: #63E6BE;"></i>}</div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div>
+                        <p class="mb-1">User Name: {{order.user.name}}</p>
+                        <p class="mb-1">User Phone: {{order.user.phone}}</p>
+                        <p class="mb-1">User Email: {{order.user.email}}</p>
+                        <p class="mb-1 ">Shipping Price: {{order.shippingPrice | currency:'GBP'}}</p>
+                        <p class="mb-1 ">Tax Price: {{order.taxPrice | currency:'GBP'}}</p>
+                        <p class="mb-1 ">Total Order Price: {{order.totalOrderPrice | currency:'GBP'}}</p>
+                        <p class="mb-1 ">Payment method type: {{order.paymentMethodType}}</p>
+                        <p class="mb-1 ">Paid At: {{order.paidAt }}</p>
+                    </div>
+                    <div >
+                        
+                        <h3 class=" mb-1  mt-3  fs-5">Shipping Address</h3>
+                        <ul class="ps-4">
+                            <li >Details : {{order.shippingAddress.details}}</li>
+                            <li >Phone : {{order.shippingAddress.phone}}</li>
+                            <li >City : {{order.shippingAddress.city}}</li>
+                        </ul>
+                    </div>
+                    <h3 class=" mb-1 mt-3 fs-5">Cart Items</h3>
+                    <div class="bg-main-light rounded-3">
+                        <div class="row">
+                            @for (item of order.cartItems; track item._id) {
+                                <div class="col-md-4 col-12 p-3">
+                                    <div class="product border-0">
+                                        <div class="product-img my-2">
+                                            <img [src]="item.product.imageCover" [alt]="item.product.title" class="w-100  rounded-2">
+                                        </div>
+                                        <div class="product-caption mt-2">
+                                            <p class="fs-6 text-main mb-1">
+                                                {{item.product.category.name}}
+                                            </p>
+                                            <h2 class="fs-6 mb-1">
+                                                {{item.product.title.split(' ').splice(0,3).join(' ')}}
+                                            </h2>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div><span>{{item.price | currency:'GBP'}} </span></div>
+                                                <div>
+                                                    @for (star of [1,2,3,4,5].slice(0 , item.product.ratingsAverage); track $index) { <span><i class="fa-solid fa-star rating-color"></i></span>}
+                                                    @if (item.product.ratingsAverage %1 != 0) {<i class="fa-regular fa-star-half-stroke rating-color"></i>}
+                                                    <span>{{item.product.ratingsAverage}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+          </div>  
+        }   
+</section>

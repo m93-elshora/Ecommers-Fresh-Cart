@@ -1,0 +1,33 @@
+@if (categoryData) {
+   <section class="categories bg-main-light p-3  mx-auto rounded-2 shadow my-3">
+        <h1 class="text-center text-main fs-1 fw-medium m-4">Categories</h1>  
+        <input [(ngModel)]="searchKey" type="text" placeholder="Search by name..." class="form-control search-border px-5 m-3 py-2 w-auto mx-auto" >         
+        <div class="container">
+            <div class="row">
+                    @for (cat of categoryData | search :searchKey; track cat._id) {
+                        <div class="col-12 col-lg-3 col-md-4 col-sm-6 p-3"  >    
+                                <div class="card  cursor-pointer rounded-2 dropdown-toggle" (click)="showAllSubCategories(cat._id)" data-bs-toggle="dropdown" aria-expanded="false" >
+                                        <div class="card-img ">
+                                            <img [src]="cat.image" class="w-100 rounded-top-2" height="300px"[alt]="cat.slug">
+                                        </div>
+                                        <div class="card-title text-center  my-3">
+                                            <h2 class="fs-3 fw-bolder text-main">{{cat.name}}</h2>
+                                        </div>
+                                            <ul class="dropdown-menu w-100">
+                                                @if (isLoadingSubCategories) {
+                                                    <li class="dropdown-item">Loading...</li>
+                                                }
+                                                @if (!isLoadingSubCategories && (!subCategoryData || subCategoryData.length === 0)) {
+                                                    <li class="dropdown-item">There is no Sub-Categories</li>
+                                                }
+                                                @for (item of subCategoryData; track $index) {
+                                                    <li class="dropdown-item">{{item.name}}</li>
+                                                }                                                
+                                            </ul>
+                                </div>
+                        </div>
+                    }
+            </div>
+        </div>
+    </section>
+}

@@ -1,0 +1,49 @@
+<section class="bg-main-light  mx-auto rounded-3 shadow my-4 categories">
+    <div class="container-fluid p-0 ">
+        <div class="row g-0 ">
+            <div class="col-9 col-sm-9 col-md-9 col-lg-10 ">
+                <owl-carousel-o [options]="mainSlider" >
+                    <ng-template carouselSlide><img src="./assets/images/slider-image-3.jpeg" class="" height="300px" alt=""></ng-template>   
+                    <ng-template carouselSlide><img src="./assets/images/online-shopping-banner.jpg" class="" height="300px" alt=""></ng-template>   
+
+                    <ng-template carouselSlide><img src="./assets/images/addidas.jpg" class="" height="300px" alt=""></ng-template>
+                    <ng-template carouselSlide><img src="./assets/images/lc.png" class="" height="300px" alt=""></ng-template>
+                    <ng-template carouselSlide><img src="./assets/images/blog-img-2.jpeg" class="" height="300px" alt=""></ng-template>   
+   
+                    <ng-template carouselSlide><img src="./assets/images/add2.jpg" class="" height="300px" alt=""></ng-template> 
+                    <ng-template carouselSlide><img src="./assets/images/k1.jpg" class="" height="300px" alt=""></ng-template>   
+                    <ng-template carouselSlide><img src="./assets/images/blog-img-1.jpeg" class="" height="300px" alt=""></ng-template>   
+  
+                    <ng-template carouselSlide><img src="./assets/images/add3.jpg" class="" height="300px" alt=""></ng-template>   
+                    <ng-template carouselSlide><img src="./assets/images/s1.jpg" class="" height="300px" alt=""></ng-template>   
+                    <ng-template carouselSlide><img src="./assets/images/j1.png" class="" height="300px" alt=""></ng-template>   
+                </owl-carousel-o>
+            </div>
+            <div class="col-3 col-sm-3 col-md-3 col-lg-2 ">
+                <img src="./assets/images/sony.jpeg" class="w-100" height="150px" alt="">
+                <img src="./assets/images/add1.jpg" class="w-100" height="150px" alt="">
+            </div>
+    
+        </div>
+    </div>
+    
+</section>
+
+<section class="bg-main-light  mx-auto rounded-3 shadow mb-4 categories">
+    <div class="container-fluid p-0">
+        <owl-carousel-o [options]="categorySlider">
+            @for (cat of categoryData; track cat._id) {
+                <ng-template carouselSlide >
+                    <img [src]="cat.image" class="w-100 " height="200px" [alt]="cat.slug" >
+                </ng-template>
+            }
+        </owl-carousel-o>
+    </div>
+</section>
+
+
+<!--* products -->
+
+<app-products></app-products>
+
+
